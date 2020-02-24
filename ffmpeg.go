@@ -92,7 +92,7 @@ func ExtractingImagesContext(ctx context.Context) (err error) {
 
 	err = cmd.Start()
 	if err == exec.ErrNotFound {
-		return ErrFFProbeNotFound
+		return ErrFFMPEGNotFound
 	} else if err != nil {
 		return err
 	}
