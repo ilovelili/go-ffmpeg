@@ -6,10 +6,14 @@ import (
 	"os"
 	"time"
 
+	ffmpeg "github.com/ilovelili/go-ffmpeg"
 	ffprobe "github.com/ilovelili/go-ffmpeg"
 )
 
 func main() {
+	ffmpeg.DefaultMP4ConvertOption("/home/min/Downloads/step.mov")
+	err := ffmpeg.ConvertToMP4(10 * time.Second)
+
 	if len(os.Args) < 2 {
 		log.Println("Please provide the path to the file to analyze")
 		os.Exit(1)
