@@ -29,14 +29,14 @@ type ExtractingImagesOption struct {
 	FrameRate    string
 	OutputWidth  *uint
 	OutputHeight *uint
-	filePath     string
+	FilePath     string
 }
 
 // DefaultExtractingImagesOption set default extract image option
 func DefaultExtractingImagesOption(filePath string) {
 	extractingImageOption = &ExtractingImagesOption{
 		FrameRate: "1",
-		filePath:  filePath,
+		FilePath:  filePath,
 	}
 }
 
@@ -62,13 +62,13 @@ func ExtractingImagesContext(ctx context.Context) error {
 	if extractingImageOption == nil {
 		return fmt.Errorf("option not set")
 	}
-	outputFileFormat := resolveOutputFrameFileFormat(extractingImageOption.filePath)
+	outputFileFormat := resolveOutputFrameFileFormat(extractingImageOption.FilePath)
 	resize := extractingImageOption.OutputWidth != nil && extractingImageOption.OutputHeight != nil
 
 	var args []string
 	if resize {
 		args = []string{
-			"-i", extractingImageOption.filePath,
+			"-i", extractingImageOption.FilePath,
 			"-r", extractingImageOption.FrameRate,
 			"-s", fmt.Sprintf("%dx%d", *extractingImageOption.OutputWidth, *extractingImageOption.OutputHeight),
 			"-f", "image2",
@@ -76,7 +76,7 @@ func ExtractingImagesContext(ctx context.Context) error {
 		}
 	} else {
 		args = []string{
-			"-i", extractingImageOption.filePath,
+			"-i", extractingImageOption.FilePath,
 			"-r", extractingImageOption.FrameRate,
 			"-f", "image2",
 			outputFileFormat,
